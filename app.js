@@ -20,7 +20,8 @@ deadlines:[
 {id:2,title:'Update CV and applications',date:'2026-10-04',time:'18:00',area:'Career & Jobs',priority:'Medium'},
 {id:3,title:'SSYDIO content plan',date:'2026-10-06',time:'17:00',area:'Businesses & Organisations',priority:'High'}],
 notes:[],documents:[]};
-let db=JSON.parse(localStorage.getItem('myLifeDashboardFresh')||'null')||structuredClone(SEED),page='Dashboard',filter='all',cal=new Date(),cloud=null;
+const cloneData=o=>JSON.parse(JSON.stringify(o));
+let db=JSON.parse(localStorage.getItem('myLifeDashboardFresh')||'null')||cloneData(SEED),page='Dashboard',filter='all',cal=new Date(),cloud=null;
 const $=id=>document.getElementById(id),today=()=>new Date().toISOString().slice(0,10),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c])),fmt=d=>d?new Date(d+'T00:00:00').toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'}):'—';
 function save(){localStorage.setItem('myLifeDashboardFresh',JSON.stringify(db));if(cloud)cloudSave()}
 function badge(v){return '<span class="pill '+(v==='Completed'?'ok':(v==='High'||v==='In Progress'?'warn':''))+'">'+esc(v)+'</span>'}
